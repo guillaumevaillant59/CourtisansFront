@@ -1,0 +1,20 @@
+header {
+    background-color: #00262F;
+    color: #EEE9CB;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header a {
+    color: #EEE9CB;
+    margin: 0 15px;
+    text-decoration: none;
+
+}   
+
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;    
+}
