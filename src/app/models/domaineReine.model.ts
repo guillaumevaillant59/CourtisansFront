@@ -3,7 +3,7 @@ import Lumiere from "./lumiere.model";
 
 export default interface DomaineReine{
     id : number,
-    lumiere : Lumiere,
-    disgrace : Disgrace
+    lumiere : number,
+    disgrace : number,
     path : string
 }
