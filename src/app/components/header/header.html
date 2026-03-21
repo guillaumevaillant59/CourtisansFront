@@ -3,5 +3,15 @@
     <nav>
         <a routerLink="">Accueil</a>
         <a routerLink="parties">Parties</a>
+        @if(auth.utilisateur) {
+            <a routerLink="profile">Profile</a>
+            <button (click)="logout()">
+      Logout
+    </button>
+        }@else {
+            <a routerLink="connexion">Connexion</a>
+        }
+        
+        
     </nav>
 </header>

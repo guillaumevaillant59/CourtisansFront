@@ -18,3 +18,8 @@ header a {
     align-items: center;
     padding: 10px 20px;    
 }
+
+button{
+    background-color: #00262F;
+    color: #EEE9CB;
+}
