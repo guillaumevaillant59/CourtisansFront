@@ -3,6 +3,6 @@ export default interface Partie {
     domaineReine : number,
     pioche : Array<number>,
     joueurs : Array<number>,
-    nombreMaxJoueur : number,
+    nombreJoueurMax : number,
     status : string
 }

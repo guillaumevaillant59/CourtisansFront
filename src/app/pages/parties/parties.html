@@ -1,1 +1,7 @@
-
+@for (item of parties(); track $index) {
+    <p>ID : {{item.id}}</p>
+    <p>Status : {{item.status}}</p>
+    <p>Nombre de joueur : {{item.nombreJoueurMax}}</p>
+}@empty {
+    <p>Il n'y a pas de parties</p>
+}
