@@ -2,6 +2,7 @@
     <p>ID : {{item.id}}</p>
     <p>Status : {{item.status}}</p>
     <p>Nombre de joueur : {{item.nombreJoueurMax}}</p>
+    <a [routerLink]="['/partie', item.id]">Voir la partie</a>
 }@empty {
     <p>Il n'y a pas de parties</p>
 }

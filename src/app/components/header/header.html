@@ -2,8 +2,8 @@
     <div> Courtisans</div>
     <nav>
         <a routerLink="">Accueil</a>
-        <a routerLink="parties">Parties</a>
         @if(auth.utilisateur) {
+            <a routerLink="parties">Parties</a>
             <a routerLink="profile">Profile</a>
             <button (click)="logout()">
       Logout
