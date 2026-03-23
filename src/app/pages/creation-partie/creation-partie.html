@@ -1,0 +1,10 @@
+<form (ngSubmit)="createPartie()">
+  <label for="nbJoueurs">Nombre de joueurs</label>
+  <select id="nbJoueurs" [(ngModel)]="partie.nombreJoueurMax" name="nombreJoueurMax">
+    @for (item of nombresJoueurs; track $index) {
+        <option [value]="item">{{ item }}</option>
+    }    
+  </select>
+
+  <button type="submit">Créer la partie</button>
+</form>

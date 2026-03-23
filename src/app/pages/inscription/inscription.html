@@ -1,0 +1,12 @@
+<form (ngSubmit)="onSubmit()">
+  <label for="email">Email</label> 
+  <input id="email" type="email" [(ngModel)]="form.email" name="email" placeholder="Email" required>
+  
+  <label for="password">Mot de passe</label>
+  <input type="password" [(ngModel)]="form.password" name="password" placeholder="Password" required>
+  
+  <label for="pseudo">Pseudo</label>
+  <input type="text" [(ngModel)]="form.pseudo" name="pseudo" id="pseudo" required>
+
+  <button type="submit">Créer un compte</button>
+</form>
