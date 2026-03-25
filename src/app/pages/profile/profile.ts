@@ -21,6 +21,7 @@ export class Profile implements OnInit {
       this.utilisateur = this.us.utilisateur;
     } else {
       // Récupère le JWT depuis localStorage
+      console.log(localStorage.getItem('jwt_token'));
       const token = localStorage.getItem('jwt_token');
       if (!token) {
         console.error('JWT manquant !');
@@ -29,7 +30,7 @@ export class Profile implements OnInit {
       }
 
       // Récupère le profil via API avec le token
-      this.us.fetchProfile(token).subscribe({
+      this.us.fetchProfile().subscribe({
         next: res => this.utilisateur = res,
         error: err => {
           console.error('Erreur API:', err);

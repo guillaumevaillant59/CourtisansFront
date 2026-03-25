@@ -20,17 +20,18 @@ export class Connexion {
     this.us.login(this.email, this.password).subscribe({
       next: (response: any) => {
         const token = response.token;
+        console.log('Token reçu:', response.token);
+
         localStorage.setItem('jwt_token', token);
 
         // ⚡ Appel correct avec subscribe
-        this.us.fetchProfile(token).subscribe({
+        this.us.fetchProfile().subscribe({
           next: res => {
             this.us.utilisateur = res;
             this.router.navigate(['/profile']);
           },
           error: err => {
             console.error('Erreur fetchProfile:', err);
-            localStorage.removeItem('jwt_token');
             this.router.navigate(['/']);
           }
         });

@@ -17,30 +17,17 @@ export class Parties implements OnInit{
   constructor(private http:HttpClient, private router:Router){}
 
   ngOnInit(): void {
-    this.ps.getParties().subscribe({
-      next : (res) => {
-        this.parties.set(res);
-      }
-    });
+    this.chargerParties(); // utilise la méthode chargement centralisée
   }
 
   rejoindrePartie(id: number, event: Event) {
     event.preventDefault();
-
-    const token = localStorage.getItem('token');
-
-    this.http.post(`http://localhost:8000/api/partie/${id}/rejoindre`, {}, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).subscribe({
+    this.ps.postWithToken(`${this.ps.apiUrl}/${id}/rejoindre`, {}).subscribe({
       next: () => {
         console.log('Partie rejointe');
-        this.router.navigate(['/partie', id]); // redirige vers la partie
+        this.router.navigate(['/partie', id]);
       },
-      error: err => {
-        console.error('Erreur lors de la connexion à la partie', err);
-      }
+      error: (err) => console.error('Erreur rejoindre partie', err),
     });
   }
 
@@ -60,8 +47,13 @@ export class Parties implements OnInit{
 }
 
   chargerParties() {
-    this.ps.getParties().subscribe(data => {
-      this.parties.set(data);
+    this.ps.getParties().subscribe({
+      next: (res) => this.parties.set(res),
+      error: (err) => {
+        console.error('Erreur chargement parties', err);
+        // si 401, rediriger vers login
+        if (err.status === 401) this.router.navigate(['/']);
+      },
     });
   }
 }

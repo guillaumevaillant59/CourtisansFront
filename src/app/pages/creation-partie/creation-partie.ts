@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { PartieService } from '../../services/partie-service';
 
 @Component({
   selector: 'app-creation-partie',
@@ -11,33 +11,23 @@ import { Router} from '@angular/router';
 })
 export class CreationPartie {
   partie = {
-  nombreJoueurMax: 2
-};
+    nombreJoueurMax: 2
+  };
 
-// Liste des options
+  // Liste des options
   nombresJoueurs = [2, 3, 4, 5];
-  
 
-constructor(private http: HttpClient, private router: Router) {}
+  constructor(private partieService: PartieService, private router: Router) {}
 
-createPartie() {
-  const token = localStorage.getItem('token');
-  this.http.post('http://localhost:8000/api/partie/creation', this.partie,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    }
-  )
-    .subscribe({
+  createPartie() {
+    this.partieService.createPartie(this.partie).subscribe({
       next: (res) => {
         console.log('Partie créée', res);
         this.router.navigate(['/parties']);
       },
       error: (err) => {
-        console.error(err);
+        console.error('Erreur création partie:', err);
       }
     });
-}
+  }
 }
