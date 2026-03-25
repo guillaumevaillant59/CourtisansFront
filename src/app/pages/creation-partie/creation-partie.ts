@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-creation-partie',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './creation-partie.html',
   styleUrl: './creation-partie.css',
 })
