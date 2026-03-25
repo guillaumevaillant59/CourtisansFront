@@ -12,15 +12,8 @@ export class Header {
   constructor(public auth: UtilisateurService, private router: Router) {}
 
   logout() {
-    this.auth.logout().subscribe({
-      next: () => {
-        this.auth.utilisateur = null;
-        this.router.navigate(['/']);
-      },
-      error: () => {
-        this.auth.utilisateur = null;
-        this.router.navigate(['/']);
-      }
-    });
+    this.auth.utilisateur = null;
+    localStorage.removeItem('jwt_token');
+    this.router.navigate(['/']);
   }
 }

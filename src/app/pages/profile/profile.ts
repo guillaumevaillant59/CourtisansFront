@@ -8,36 +8,41 @@ import { UtilisateurService } from '../../services/utilisateur-service';
   selector: 'app-profile',
   imports: [CommonModule],
   templateUrl: './profile.html',
-  styleUrl: './profile.css',
+  styleUrls: ['./profile.css'], // corrigé
 })
 export class Profile implements OnInit {
-    utilisateur: Utilisateur | null = null;
+  utilisateur: Utilisateur | null = null;
 
-  constructor(private us : UtilisateurService, private router: Router) {}
+  constructor(private us: UtilisateurService, private router: Router) {}
 
   ngOnInit() {
-    // si on a déjà le DTO dans le service, on l'utilise
+    // Vérifie si on a déjà le DTO dans le service
     if (this.us.utilisateur) {
       this.utilisateur = this.us.utilisateur;
     } else {
-      // sinon on le récupère via API
-      this.us.fetchProfile().subscribe({
+      // Récupère le JWT depuis localStorage
+      const token = localStorage.getItem('jwt_token');
+      if (!token) {
+        console.error('JWT manquant !');
+        this.router.navigate(['/']); // redirige vers login
+        return;
+      }
+
+      // Récupère le profil via API avec le token
+      this.us.fetchProfile(token).subscribe({
         next: res => this.utilisateur = res,
         error: err => {
-          console.error(err);
-          this.router.navigate(['/']); // redirige vers login si pas connecté
+          console.error('Erreur API:', err);
+          this.router.navigate(['/']); // redirige vers login si token invalide
         }
       });
     }
   }
 
   onLogout() {
-    this.us.logout().subscribe({
-      next: () => {
-        this.us.utilisateur = null;
-        this.router.navigate(['/']);
-      },
-      error: err => console.error(err)
-    });
+    // Supprime le token côté client
+    localStorage.removeItem('jwt_token');
+    this.us.utilisateur = null;
+    this.router.navigate(['/']);
   }
 }
