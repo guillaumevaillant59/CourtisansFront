@@ -26,7 +26,7 @@ export class Parties implements OnInit{
 
   rejoindrePartie(id: number, event: Event) {
     event.preventDefault();
-    
+
     const token = localStorage.getItem('token');
 
     this.http.post(`http://localhost:8000/api/partie/${id}/rejoindre`, {}, {
@@ -41,6 +41,27 @@ export class Parties implements OnInit{
       error: err => {
         console.error('Erreur lors de la connexion à la partie', err);
       }
+    });
+  }
+
+  supprimer(id: number, event: Event) {
+  event.preventDefault();
+
+  this.ps.supprimerPartie(id).subscribe({
+    next: () => {
+      console.log('Partie supprimée');
+      // Exemple : recharger la liste
+      this.chargerParties();
+    },
+    error: err => {
+      console.error('Erreur suppression', err);
+    }
+  });
+}
+
+  chargerParties() {
+    this.ps.getParties().subscribe(data => {
+      this.parties.set(data);
     });
   }
 }

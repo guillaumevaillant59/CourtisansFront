@@ -13,4 +13,14 @@ export class PartieService {
   getParties(): Observable<Partie[]> {
     return this.http.get<Partie[]>(`${this.apiUrl}`);
   }
+
+  supprimerPartie(id: number) {
+  const token = localStorage.getItem('token');
+
+  return this.http.delete(`http://localhost:8000/api/partie/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+}
 }
