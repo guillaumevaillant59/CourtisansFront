@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-creation-partie',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './creation-partie.html',
   styleUrl: './creation-partie.css',
 })
@@ -17,7 +18,7 @@ export class CreationPartie {
   nombresJoueurs = [2, 3, 4, 5];
   
 
-constructor(private http: HttpClient) {}
+constructor(private http: HttpClient, private router: Router) {}
 
 createPartie() {
   const token = localStorage.getItem('token');
@@ -32,6 +33,7 @@ createPartie() {
     .subscribe({
       next: (res) => {
         console.log('Partie créée', res);
+        this.router.navigate(['/parties']);
       },
       error: (err) => {
         console.error(err);

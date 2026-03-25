@@ -2,6 +2,9 @@
     <p>ID : {{item.id}}</p>
     <p>Status : {{item.status}}</p>
     <p>Nombre de joueur : {{item.nombreJoueurMax}}</p>
+    @if (item.status === "en attente") {
+        <button (click)="rejoindrePartie(item.id, $event)" [disabled]="item.status !== 'en attente'">Rejoindre</button>
+    }
     <a [routerLink]="['/partie', item.id]">Voir la partie</a>
 }@empty {
     <p>Il n'y a pas de parties</p>

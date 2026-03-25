@@ -1,1 +1,4 @@
-<app-domaine-reine [domaineReineId]="partie?.domaineReine"></app-domaine-reine>
+@if (partie?.status !== 'en attente') {
+    <app-domaine-reine [domaineReineId]="partie?.domaineReine"></app-domaine-reine>
+}
+
