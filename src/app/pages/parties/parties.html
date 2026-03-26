@@ -6,12 +6,18 @@
         <button (click)="rejoindrePartie(item.id, $event)" [disabled]="item.status !== 'en attente'">Rejoindre</button>
     }
     <button (click)="supprimer(item.id, $event)">
-  Supprimer
-</button>
+        Supprimer
+    </button>
+    @if(notification()){
+        <div  class="notification">
+            {{ notification() }}
+        </div>
+    }
     <a [routerLink]="['/partie', item.id]">Voir la partie</a>
 }@empty {
     <p>Il n'y a pas de parties</p>
 }
+
 <div>
     <a routerLink="/creation">Créer une nouvelle partie</a>
 </div>
