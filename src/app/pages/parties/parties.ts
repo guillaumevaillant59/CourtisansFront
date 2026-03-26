@@ -16,6 +16,7 @@ export class Parties implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('jwt_token'));
     this.chargerParties(); // charge la liste au démarrage
   }
 

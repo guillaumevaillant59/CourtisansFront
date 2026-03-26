@@ -20,12 +20,11 @@ export class PartieComponent implements OnInit{
   ) {}
 
   ngOnInit() {
+    console.log(localStorage.getItem('jwt_token'));
     const id = this.route.snapshot.paramMap.get('id');
 
-    this.http.get<Partie>(`http://localhost:8000/api/partie/${id}`, {
-      withCredentials: true
-    }).subscribe(res => {
-      console.log(res);
+    this.http.get<Partie>(`http://localhost:8000/api/partie/${id}`)
+    .subscribe(res => {
       this.partie = res;
     });
   }
