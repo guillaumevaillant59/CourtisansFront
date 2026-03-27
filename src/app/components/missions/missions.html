@@ -1,1 +1,5 @@
-<p>missions works!</p>
+<div>
+    @if (missionBlanche !== null && missionBleue !== null) {}
+    <img [src]="missionBlanche?.path" [alt]="missionBlanche?.objectif">
+    <img [src]="missionBleue?.path" [alt]="missionBleue?.objectif">
+</div>

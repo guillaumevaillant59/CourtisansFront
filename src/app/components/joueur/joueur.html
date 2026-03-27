@@ -1,1 +1,4 @@
-<p>joueur works!</p>
+@if (joueur?.missionBlanche !== null && joueur?.missionBleue !== null) {
+    <app-missions [missionBlancheId]="joueur?.missionBlanche" [missionBleueId]="joueur?.missionBleue"></app-missions>
+}
+

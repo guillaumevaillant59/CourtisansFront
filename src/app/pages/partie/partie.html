@@ -1,5 +1,18 @@
 @if (partie?.status !== 'en attente') {
-    <app-domaine-reine [domaineReineId]="partie?.domaineReine"></app-domaine-reine>
+    @if(partie?.domaineReine !== null){
+        <app-domaine-reine [domaineReineId]="partie?.domaineReine"></app-domaine-reine>
+    }
+    @for (item of joueurs; track $index) {
+        @if (item.utilisateur === currentUserId) {
+            @if (item.id !== null) {
+                <app-joueur [joueurId]="item.id"></app-joueur>
+            }
+            
+        }
+    }
+        
+    
+    
    
     
 }

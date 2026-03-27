@@ -21,7 +21,6 @@ export class Profile implements OnInit {
       this.utilisateur = this.us.utilisateur;
     } else {
       // Récupère le JWT depuis localStorage
-      console.log(localStorage.getItem('jwt_token'));
       const token = localStorage.getItem('jwt_token');
       if (!token) {
         console.error('JWT manquant !');
