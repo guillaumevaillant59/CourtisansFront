@@ -23,11 +23,13 @@ export class Connexion {
         console.log('Token reçu:', response.token);
 
         localStorage.setItem('jwt_token', token);
+        
 
         // ⚡ Appel correct avec subscribe
         this.us.fetchProfile().subscribe({
           next: res => {
-            this.us.utilisateur = res;
+            localStorage.setItem('user_id', res.id.toString());
+            this.us.utilisateur = res;            
             this.router.navigate(['/profile']);
           },
           error: err => {
